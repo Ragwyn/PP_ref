@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Edit user</title>
+</head>
+<body>
+<form th:method="PATCH" th:action="@{/admin/user/{id}(id=${user.getId()})}" th:object="${user}">
+  <label for="name" > Enter name:</label>
+  <input type="text" th:field="*{name}" id="name">
+  <div style="color: darkolivegreen" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name error</div>
+  <br/>
+  <label for="lastName" > Enter lastName:</label>
+  <input type="text" th:field="*{lastName}" id="lastName">
+  <div style="color: darkolivegreen" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">Last Name error</div>
+  <br/>
+  <label for="year" > Enter year:</label>
+  <input type="text" th:field="*{year}" id="year">
+  <div style="color: darkolivegreen" th:if="${#fields.hasErrors('year')}" th:errors="*{year}">Year error</div>
+  <br/>
+  <label for="email" > Enter email:</label>
+  <input type="text" th:field="*{email}" id="email">
+  <div style="color: darkolivegreen" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email error</div>
+  <br/>
+  <label for="login" > Enter login:</label>
+  <input type="text" th:field="*{login}" id="login">
+  <div style="color: darkolivegreen" th:if="${#fields.hasErrors('login')}" th:errors="*{login}">login error</div>
+  <br/>
+  <label for="password" > Enter password:</label>
+  <input type="password" th:field="*{password}" id="password">
+  <div style="color: darkolivegreen" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">password error</div>
+  <br/>
+  <label for="role"> Select role</label>
+  <select id="role" th:field="*{roles}" multiple>
+    <option th:each="role:${roles}" th:value="${{role}}" th:text="${role.rolename}"/>
+  </select>
+  <br/>
+  <input type="submit" value="Edit">
+</form>
+</body>
+</html>
