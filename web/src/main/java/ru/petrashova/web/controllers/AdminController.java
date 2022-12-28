@@ -23,7 +23,7 @@ public class AdminController {
         this.roleService = roleService;
     }
 
-    @GetMapping()
+    @GetMapping() // 404
     public String showAllUsers(Model model){
         model.addAttribute("user", usersService.getAllUsers());
         return "admin/show_all";
@@ -34,12 +34,12 @@ public class AdminController {
         model.addAttribute("role", roleService.getAll());
         return "admin/new_user";
     }
-    @GetMapping("/user/{id}")
+    @GetMapping("/user/{id:\\d+}")
     public String showUser(@PathVariable("id") int id, Model model){
         model.addAttribute("user", usersService.getUser(id));
         return "admin/show_user";
     }
-    @PostMapping
+    @PostMapping // работает, но криво  принажатии create ошибка 403
     public String createUser(@ModelAttribute("user") @Valid User user, BindingResult bindingResult){
         if (bindingResult.hasErrors())
             return "admin/new_user";
@@ -47,13 +47,13 @@ public class AdminController {
         usersService.save(user);
         return "redirect:/admin";
     }
-    @GetMapping("/user/{id}/edit")
+    @GetMapping("/user/{id:\\d+}/edit")
     public String edit(Model model, @PathVariable("id") int id){
         model.addAttribute("user", usersService.getUser(id));
         model.addAttribute("role", roleService.getAll());
         return "admin/edit";
     }
-    @PatchMapping("/user/{id}")
+    @PatchMapping("/user/{id:\\d+}")
     public String update(@ModelAttribute("user") @Valid User user,
                          BindingResult bindingResult, @PathVariable("id") int id){
         if (bindingResult.hasErrors())
@@ -62,7 +62,7 @@ public class AdminController {
         usersService.update(user);
         return "redirect:/admin";
     }
-    @DeleteMapping("/user/{id}")
+    @DeleteMapping("/user/{id:\\d+}")
     public String delete(@PathVariable("id") int id){
         usersService.delete(id);
         return "redirect:/admin";

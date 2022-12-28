@@ -1,7 +1,7 @@
 package ru.petrashova.web.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
+
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,14 +25,14 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping("{id}")
+    @GetMapping("{id:\\d+}")
     String getUser (@PathVariable("id") int id, Model model) throws AuthenticationException {
         User currentUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if (currentUser.getRoles().stream().allMatch(r-> r.getRole().equals("ROLE_USER")) && !(currentUser.getId() == id)){
             throw new AuthenticationException();
         }
         model.addAttribute("user", userService.getUser(id));
-        return "/users/show_user";
+        return "/user/show_user";
     }
 
     @GetMapping("/")

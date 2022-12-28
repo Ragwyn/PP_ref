@@ -44,7 +44,7 @@ public class User implements UserDetails {
     @NotEmpty(message = "Поле 'Пароль' не должно быть пустым")
     private String password;
 
-    @ManyToMany(fetch = FetchType.LAZY) // создание таблицы связи
+    @ManyToMany(fetch = FetchType.EAGER) // создание таблицы связи
     @JoinTable(
          name = "users_roles",
          joinColumns = @JoinColumn(name = "user_id"),
