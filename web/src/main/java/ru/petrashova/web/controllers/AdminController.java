@@ -25,7 +25,7 @@ public class AdminController {
 
     @GetMapping() // 404
     public String showAllUsers(Model model){
-        model.addAttribute("user", usersService.getAllUsers());
+        model.addAttribute("users", usersService.getAllUsers());
         return "admin/show_all";
     }
     @GetMapping("/new_user")
