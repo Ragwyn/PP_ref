@@ -30,14 +30,13 @@ public class UserServiceImpl implements UserService, UserDetailsService { // Ð—Ð
     UserRepository userRepository;
     @Autowired
     RoleRepository roleRepository;
-    @Autowired
-    BCryptPasswordEncoder bCryptPasswordEncoder;
+
 
     @Autowired
-    public UserServiceImpl(UserRepository userRepository, RoleRepository roleRepository, BCryptPasswordEncoder bCryptPasswordEncoder) {
+    public UserServiceImpl(UserRepository userRepository, RoleRepository roleRepository) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
-        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+
     }
 
     @Override
@@ -78,14 +77,14 @@ public class UserServiceImpl implements UserService, UserDetailsService { // Ð—Ð
     @Transactional
     @Override
     public void save(User user) {
-        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+
         userRepository.save(user);
     }
 
     @Transactional
     @Override
     public void update(User updatedUser) {
-        updatedUser.setPassword(bCryptPasswordEncoder.encode(updatedUser.getPassword()));
+
         userRepository.save(updatedUser);
     }
 

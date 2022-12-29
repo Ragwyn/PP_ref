@@ -6,6 +6,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import ru.petrashova.web.models.User;
 
+import java.util.List;
 import java.util.Optional;
 
 
@@ -13,6 +14,7 @@ import java.util.Optional;
 public interface UserRepository extends JpaRepository <User, Integer> {
 //    @Query("select u from User u join fetch u.roles where l.login=:login")
     Optional<User> findByLogin(String login);
+
 
 }
 

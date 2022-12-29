@@ -25,7 +25,7 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY) // указывается стратегия генерации ключа в БД
     @Column(name = "id") // указывает на имя колонки, которая отображается в свойство сущности
     private int id;
-    @Column(name = "name")
+    @Column(name = "user_name")
     @NotEmpty(message = "Поле 'Имя' не должно быть пустым")
     private String name;
     @Column(name = "last_name")
@@ -49,22 +49,22 @@ public class User implements UserDetails {
          name = "users_roles",
          joinColumns = @JoinColumn(name = "user_id"),
          inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Set<Role> roles = new HashSet<>();
+    private Set<Role> roles;
 
     public User() { // пустой контсруктор
     }
 
 
-    public User(int id, String name, String lastName, int year, String email, String login, String password, Set<Role> roles) {
-        this.id = id;
-        this.name = name;
-        this.lastName = lastName;
-        this.year = year;
-        this.email = email;
-        this.login = login;
-        this.password = password;
-        this.roles = roles;
-    }
+//    public User(int id, String name, String lastName, int year, String email, String login, String password, Set<Role> roles) {
+//        this.id = id;
+//        this.name = name;
+//        this.lastName = lastName;
+//        this.year = year;
+//        this.email = email;
+//        this.login = login;
+//        this.password = password;
+//        this.roles = roles;
+//    }
 
 
     public long getId() {

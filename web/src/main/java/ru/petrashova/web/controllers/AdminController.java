@@ -23,7 +23,7 @@ public class AdminController {
         this.roleService = roleService;
     }
 
-    @GetMapping() // 404
+    @GetMapping("/show_all") // 404
     public String showAllUsers(Model model){
         model.addAttribute("users", usersService.getAllUsers());
         return "admin/show_all";
@@ -45,7 +45,7 @@ public class AdminController {
             return "admin/new_user";
 
         usersService.save(user);
-        return "redirect:/admin";
+        return "redirect:/admin/show_all";
     }
     @GetMapping("/user/{id:\\d+}/edit")
     public String edit(Model model, @PathVariable("id") int id){

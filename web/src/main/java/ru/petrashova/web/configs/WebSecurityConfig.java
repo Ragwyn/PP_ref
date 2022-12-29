@@ -34,7 +34,7 @@ public class WebSecurityConfig {
         http   .authorizeHttpRequests()
                 .requestMatchers("/admin").hasRole("ADMIN")
                 .requestMatchers("/user").hasAnyRole("ADMIN", "USER" )
-                .requestMatchers("/", "/login").permitAll()
+                .requestMatchers( "/login").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin().successHandler(successUserHandler)
@@ -47,8 +47,10 @@ public class WebSecurityConfig {
 
 
     @Bean
-    public BCryptPasswordEncoder bCryptPasswordEncoder() {
-        return new BCryptPasswordEncoder();
+    public PasswordEncoder bCryptPasswordEncoder() {
+
+        //return new BCryptPasswordEncoder();
+        return NoOpPasswordEncoder.getInstance();
     }
 
 
